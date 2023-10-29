@@ -1,0 +1,51 @@
+<div class='card'>
+
+  <div class="sidebar">
+    <pm-query-editor (queryChanged)="onQueryChanged($event)"></pm-query-editor>
+  </div>
+
+  <div class='content card-body'>
+    <div class='table-responsive'>
+      <table class='table'
+             *ngIf='warships.length'>
+        <thead>
+          <tr>
+            <th>Class Name</th>
+            <th>Nationality</th>
+            <th>Type Abbreviation</th>
+            <th>Units</th>
+            <th>Speed (Ircwcc)</th>
+            <th>Speed (Knots)</th>
+            <th>Length (Feet)</th>
+            <th>Beam (Feet)</th>
+            <th>Standard Weight</th>
+            <th>Guns</th>
+            <th>Gun Diameter</th>
+            <th>Armor</th>
+            <th>Rudders</th>
+            <th>Shafts</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr *ngFor='let ship of warships'>
+            <td>{{ ship.className }}</td>
+            <td>{{ ship.nation | lowercase}}</td>
+            <td>{{ ship.classAbbreviation }}</td>
+            <td>{{ ship.units}}</td>
+            <td>{{ ship.speedIrcwcc}}</td>
+            <td>{{ ship.speedKnots}}</td>
+            <td>{{ ship.length}}</td>
+            <td>{{ ship.beam}}</td>
+            <td>{{ ship.standardWeight}}</td>
+            <td>{{ ship.guns}}</td>
+            <td>{{ ship.gunDiameter}}</td>
+            <td>{{ ship.armor}}</td>
+            <td>{{ ship.rudders}}</td>
+            <td>{{ ship.shafts}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
