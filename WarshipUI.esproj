@@ -9,4 +9,7 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\WarshipUI</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include=".github\workflows\main.yml" />
+  </ItemGroup>
 </Project>
