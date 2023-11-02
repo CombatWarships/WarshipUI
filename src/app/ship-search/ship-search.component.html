@@ -10,26 +10,25 @@
              *ngIf='warships.length'>
         <thead>
           <tr>
-            <th>Class Name</th>
-            <th>Nationality</th>
-            <th>Type Abbreviation</th>
-            <th>Units</th>
-            <th>Speed (Ircwcc)</th>
-            <th>Speed (Knots)</th>
-            <th>Length (Feet)</th>
-            <th>Beam (Feet)</th>
-            <th>Standard Weight</th>
-            <th>Guns</th>
-            <th>Gun Diameter</th>
-            <th>Armor</th>
-            <th>Rudders</th>
-            <th>Shafts</th>
+            <th><a (click)="sortOn('className')">Class Name</a></th>
+            <th><a (click)="sortOn('nation')">Nationality</a></th>
+            <th><a (click)="sortOn('classAbbreviation')">Type Abbreviation</a></th>
+            <th><a (click)="sortOn('units')">Units</a></th>
+            <th><a (click)="sortOn('speedIrcwcc')">Speed (Ircwcc)</a></th>
+            <th><a (click)="sortOn('speedKnots')">Speed (Knots)</a></th>
+            <th><a (click)="sortOn('length')">Length (Feet)</a></th>
+            <th><a (click)="sortOn('beam')">Beam (Feet)</a></th>
+            <th><a (click)="sortOn('standardWeight')">Standard Weight</a></th>
+            <th><a (click)="sortOn('guns')">Guns</a></th>
+            <th><a (click)="sortOn('gunDiameter')">Gun Diameter</a></th>
+            <th><a (click)="sortOn('armor')">Armor</a></th>
+            <th><a (click)="sortOn('rudders')">Rudders</a></th>
+            <th><a (click)="sortOn('shafts')">Shafts</a></th>
           </tr>
         </thead>
         <tbody>
-          
           <tr *ngFor='let ship of warships'>
-            <td>{{ ship.className }}</td>
+            <td><a [routerLink]="['/ship-search', ship.id]"> {{ ship.className }} </a></td>
             <td>{{ ship.nation | lowercase}}</td>
             <td>{{ ship.classAbbreviation }}</td>
             <td>{{ ship.units}}</td>

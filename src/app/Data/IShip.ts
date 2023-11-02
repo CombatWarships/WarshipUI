@@ -1,4 +1,6 @@
 export interface IShip {
+
+  id: string;
   nation: string;
   className: string;
   classType: string;

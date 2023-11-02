@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IShipQuery } from 'src/app/Data/IShipQuery';
-import { ShipSearchService } from '../ship-search.service';
 import { IQueryRange } from 'src/app/Data/IQueryRange';
 import { debounceTime } from 'rxjs';
+import { ShipSearchService } from '../../Services/ship-search.service';
 
 @Component({
   selector: 'pm-query-editor',
