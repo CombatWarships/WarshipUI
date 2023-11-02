@@ -3,95 +3,19 @@ on:
   push:
   workflow_dispatch:
 
-env:
-  AZURE_CONTAINER_REGISTRY: "warshipregistry"
-  CONTAINER_NAME: "warshipui"
-  DOCKER_PATH: "./Dockerfile"
-  CLUSTER_NAME: "aks"
 
 jobs:
-  BuildImage:
-    permissions:
-      contents: read
-      id-token: write
-    runs-on: ubuntu-latest
-    env:
-      RESOURCE_GROUP: "CombatWarships"
-    steps:
-      # Checks out the repository this file is in
-      - uses: actions/checkout@v3
-          
-      # Logs in with your Azure credentials
-      - name: Azure login
-        uses: azure/login@v1.4.6
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      # Builds and pushes an image up to your Azure Container Registry
-      - name: Build and push image to ACR
-        run: |
-          az acr build -f ${{env.DOCKER_PATH}} --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
-
-  Deploy-to-AKS:
+  Build: 
     permissions:
       actions: read
       contents: read
-      id-token: write
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    needs: [BuildImage]    
-    env:
-      RESOURCE_GROUP: "aks"
-    steps:
-    
-      # Checks out the repository this file is in
-      - uses: actions/checkout@v3
-      
-      # Logs in with your Azure credentials
-      - name: Azure login
-        uses: azure/login@v1.4.6
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-    
-      # Use kubelogin to configure your kubeconfig for Azure auth
-      - name: Set up kubelogin for non-interactive login
-        uses: azure/use-kubelogin@v1
-        with:
-          kubelogin-version: 'v0.0.25'
-
-      # Update K8 variables with information from this CI.
-      - name: Update K8 variables 
-        uses: cschleiden/replace-tokens@v1
-        with:
-          files: '["Kubernetes/*.yml"]'
-          tokenPrefix: __
-          tokenSuffix: __
-        env:
-          IMAGE_NAME: ${{ env.CONTAINER_NAME }}
-          IMAGE_TAG: ${{ github.sha }}
-
-      # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
-      - name: Get K8s context
-        uses: azure/aks-set-context@v3
-        with:
-          resource-group: ${{ env.RESOURCE_GROUP }}
-          cluster-name: ${{ env.CLUSTER_NAME }}
-          admin: 'false'
-          use-kubelogin: 'true'
-
-      # Deploys application based on manifest files from previous step
-      - name: Deploy application
-        uses: Azure/k8s-deploy@v4
-        with:
-          action: deploy
-          manifests: |
-            Kubernetes/deployment.yml
-            Kubernetes/service.yml
-          images: |
-            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
-
-          
+      id-token: write  
+    uses: CombatWarships/DevOps/.github/workflows/BuildAndDeploy.yml@main
+    with:
+      CONTAINER_NAME: warshipui
+    secrets: 
+      DBConnection: none    
+      APP_INSIGHTS: ${{secrets.APP_INSIGHTS}}
+      AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}  
+      AZURE_TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
+      AZURE_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
