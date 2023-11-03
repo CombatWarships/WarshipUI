@@ -12,6 +12,7 @@ import { IQueryRange } from "../Data/IQueryRange";
 export class ShipSearchService {
   private baseUrl = 'http://20.88.241.156'
   private searchUrl = `${this.baseUrl}/api/SearchWarships`
+  private warshipUrl = `${this.baseUrl}/api/SWarship`
   private queryRangeUrl = `${this.baseUrl}/api/ShipQueryRange`
 
   private cachedShips: IShip[] = [];
@@ -29,7 +30,7 @@ export class ShipSearchService {
     }
 
     const params = new HttpParams().append('shipId', id);
-    return this.http.get<IShip>(this.searchUrl, { params })
+    return this.http.get<IShip>(this.warshipUrl, { params })
       .pipe(
         tap(data => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)
