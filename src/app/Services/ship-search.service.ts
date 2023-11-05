@@ -12,7 +12,7 @@ import { IQueryRange } from "../Data/IQueryRange";
 export class ShipSearchService {
   private baseUrl = 'http://20.88.241.156'
   private searchUrl = `${this.baseUrl}/api/SearchWarships`
-  private warshipUrl = `${this.baseUrl}/api/SWarship`
+  private warshipUrl = `${this.baseUrl}/api/Warship`
   private queryRangeUrl = `${this.baseUrl}/api/ShipQueryRange`
 
   private cachedShips: IShip[] = [];
