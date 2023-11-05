@@ -12,7 +12,8 @@ jobs:
       id-token: write  
     uses: CombatWarships/DevOps/.github/workflows/BuildAndDeploy.yml@main
     with:
-      CONTAINER_NAME: warshipui
+      CONTAINER_NAME: warshipui      
+      HasAppSettings: false
     secrets: 
       DBConnection: none    
       APP_INSIGHTS: ${{secrets.APP_INSIGHTS}}
