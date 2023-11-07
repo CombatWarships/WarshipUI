@@ -30,7 +30,6 @@
           <tr *ngFor='let ship of warships'>
             <td><a [routerLink]="['/ship-search', ship.id]"> {{ ship.className }} </a></td>
             <td>{{ ship.nation | lowercase}}</td>
-            <td>{{ ship.classAbbreviation }}</td>
             <td>{{ ship.units}}</td>
             <td>{{ ship.speedIrcwcc}}</td>
             <td>{{ ship.speedKnots}}</td>
