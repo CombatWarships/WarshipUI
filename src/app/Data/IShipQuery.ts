@@ -3,7 +3,6 @@ export interface IShipQuery
 {
     nation? : string;
     className? : string;
-	  classAbbreviation?  : string;
     
     minUnits? : number;
     maxUnits?  : number;

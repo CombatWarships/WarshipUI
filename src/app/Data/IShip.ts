@@ -4,7 +4,6 @@ export interface IShip {
   nation: string;
   className: string;
   classType: string;
-  classAbbreviation: string;
   units: number;
   numberInClass: number;
   speedIrcwcc: number;

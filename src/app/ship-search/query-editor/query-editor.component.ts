@@ -23,7 +23,6 @@ export class QueryEditorComponent implements OnInit {
     this.queryForm = this.fb.group({
       nation: '',
       className: '',
-      classAbbreviation: '',
       minUnits: 0,
       maxUnits: 0,
       minSpeedIrcwcc: 0,
