@@ -5,19 +5,23 @@ import { Observable, catchError, tap, throwError } from "rxjs";
 import { } from "rxjs";
 import { IShipQuery } from "../Data/IShipQuery";
 import { IQueryRange } from "../Data/IQueryRange";
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShipSearchService {
-  private baseUrl = 'http://20.118.83.236/warshipregistry'
-  private searchUrl = `${this.baseUrl}/api/SearchWarships`
-  private warshipUrl = `${this.baseUrl}/api/Warship`
-  private queryRangeUrl = `${this.baseUrl}/api/ShipQueryRange`
+  private hostname = "unknown"
+  private get searchUrl() { return `http://${this.hostname}/warshipregistry/api/SearchWarships` }
+  private get warshipUrl() { return `http://${this.hostname}/warshipregistry/api/Warship` }
+  private get queryRangeUrl() { return `http://${this.hostname}/warshipregistry/api/ShipQueryRange` }
 
   private cachedShips: IShip[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient)
+  {
+    this.hostname = window.location.hostname;
+  }
 
 
   getShip(id: string): Observable<IShip> {
