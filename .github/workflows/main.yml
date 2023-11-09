@@ -13,7 +13,7 @@ jobs:
     uses: CombatWarships/DevOps/.github/workflows/BuildAndDeploy.yml@main
     with:
       CONTAINER_NAME: warshipui      
-      ROUTE_BASE_INGRESS: 'true'
+      ROUTE_BASE_INGRESS: "true"
     secrets: 
       DBConnection: none    
       APP_INSIGHTS: ${{secrets.APP_INSIGHTS}}
