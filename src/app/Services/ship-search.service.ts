@@ -10,7 +10,7 @@ import { IQueryRange } from "../Data/IQueryRange";
   providedIn: 'root'
 })
 export class ShipSearchService {
-  private baseUrl = 'http://20.88.241.156'
+  private baseUrl = 'http://20.118.83.236/warshipregistry'
   private searchUrl = `${this.baseUrl}/api/SearchWarships`
   private warshipUrl = `${this.baseUrl}/api/Warship`
   private queryRangeUrl = `${this.baseUrl}/api/ShipQueryRange`
