@@ -1,13 +1,36 @@
-<div>
-  <div class="header">
-    <div class="title">
+<header>
+  <div class="row ">
+    <section class="column small-12">
+
+      <!--<img src="images/logo.svg" alt="Combat Warships">-->
       <h1>Combat Warships</h1>
-    </div>
-    <div></div>
-    <div class="navLink"><a href=".">Home</a></div>
-    <div class="navLink"><a href=".">Warship Search</a></div>
-
+      <h2>R/C Naval Battles</h2>
+    </section>
   </div>
+</header>
 
-  <router-outlet></router-outlet>
-</div>
+<nav>
+  <div class="row ">
+    <button id="hamburgerBtn" >&#9776;</button>
+    <ul id="primaryNav">
+      <li class="active"><a href=".">Home</a></li>
+      <li><a href="./ship-search">Warship Search</a></li>
+      <li><a href="./ship-import">Create Warship</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="row ">
+    <section class="column small-12">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</main>
+
+
+<footer>
+
+  <div class="row "></div>
+
+</footer>

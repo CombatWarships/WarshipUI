@@ -1,10 +1,9 @@
-<div class='card'>
-
+<div>
   <div class="sidebar">
     <pm-query-editor (queryChanged)="onQueryChanged($event)"></pm-query-editor>
   </div>
 
-  <div class='content card-body'>
+  <div class='content'>
     <div class='table-responsive'>
       <table class='table'
              *ngIf='warships.length'>

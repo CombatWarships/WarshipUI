@@ -17,9 +17,8 @@ export class QueryEditorComponent implements OnInit {
   @Output() queryChanged: EventEmitter<IShipQuery> = new EventEmitter<IShipQuery>();
 
 
-  constructor(private fb: FormBuilder, private searchAPI: ShipSearchService) {}
-
-  ngOnInit(): void {
+  ngOnInit(): void { }
+  constructor(private fb: FormBuilder, private searchAPI: ShipSearchService) {
     this.queryForm = this.fb.group({
       nation: '',
       className: '',

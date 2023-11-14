@@ -20,7 +20,7 @@ export class ShipSearchService {
 
   constructor(private http: HttpClient)
   {
-    this.hostname = window.location.hostname;
+    this.hostname = "20.118.83.236"; // window.location.hostname;
   }
 
 
