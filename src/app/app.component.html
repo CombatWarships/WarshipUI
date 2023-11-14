@@ -1,36 +1,44 @@
 <header>
-  <div class="row ">
-    <section class="column small-12">
+  <div class="container">
+    <div class="row ">
+      <div class="col">
 
-      <!--<img src="images/logo.svg" alt="Combat Warships">-->
-      <h1>Combat Warships</h1>
-      <h2>R/C Naval Battles</h2>
-    </section>
+        <!--<img src="images/logo.svg" alt="Combat Warships">-->
+        <h1>Combat Warships</h1>
+        <h2>R/C Naval Battles</h2>
+      </div>
+    </div>
   </div>
 </header>
 
 <nav>
-  <div class="row ">
-    <button id="hamburgerBtn" >&#9776;</button>
-    <ul id="primaryNav">
-      <li class="active"><a href=".">Home</a></li>
-      <li><a href="./ship-search">Warship Search</a></li>
-      <li><a href="./ship-import">Create Warship</a></li>
-    </ul>
+  <div class="container">
+    <div class="row ">
+      <div class="col">
+        <button id="hamburgerBtn">&#9776;</button>
+        <ul id="primaryNav">
+          <li class="active"><a href=".">Home</a></li>
+          <li><a href="./ship-search">Warship Search</a></li>
+          <li><a href="./ship-import">Create Warship</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>
 
 <main>
-  <div class="row ">
-    <section class="column small-12">
-      <router-outlet></router-outlet>
-    </section>
+  <div class="container">
+    <div class="row">
+      <section class="col">
+        <router-outlet></router-outlet>
+      </section>
+    </div>
   </div>
 </main>
 
 
 <footer>
-
-  <div class="row "></div>
-
+  <div class="container">
+    <div class="row "></div>
+  </div>
 </footer>

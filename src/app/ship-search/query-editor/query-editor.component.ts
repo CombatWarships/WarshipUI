@@ -8,7 +8,7 @@ import { ShipSearchService } from '../../Services/ship-search.service';
 @Component({
   selector: 'pm-query-editor',
   templateUrl: './query-editor.component.html',
-  styleUrls: ['./query-editor.component.css']
+  styleUrls: ['./query-editor.component.scss']
 })
 export class QueryEditorComponent implements OnInit {
 

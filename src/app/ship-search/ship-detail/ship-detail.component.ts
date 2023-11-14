@@ -5,7 +5,7 @@ import { IShip } from '../../Data/IShip';
 
 @Component({
   templateUrl: './ship-detail.component.html',
-  styleUrls: ['./ship-detail.component.css']
+  styleUrls: ['./ship-detail.component.scss']
 })
 export class ShipDetailComponent {
 

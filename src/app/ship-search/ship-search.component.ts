@@ -6,7 +6,7 @@ import { BehaviorSubject, combineLatest, scan, map } from "rxjs";
 
 @Component({
   templateUrl: './ship-search.component.html',
-  styleUrls: ["./ship-search.component.css"]
+  styleUrls: ["./ship-search.component.scss"]
 })
 export class ShipSearchComponent {
   pageTitle = "Product List";

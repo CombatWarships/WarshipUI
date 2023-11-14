@@ -1,0 +1,22 @@
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@import "Styles/style.variables.scss";
+
+@import "Styles/style.small.scss";
+
+@media only screen and (min-width: 768px) {
+  @import "Styles/style.medium.scss";
+}
+
+@media only screen and (min-width: 1024px) {
+  @import "Styles/style.large.scss";
+}
