@@ -9,10 +9,6 @@ export class AppComponent {
 
   title = 'Combat Warships';
 
-  constructor(private el: ElementRef) {
-  }
-
-  onToggleNav(obj: any) {
-
+  constructor() {
   }
 }

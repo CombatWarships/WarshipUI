@@ -1,47 +1,51 @@
-<div>
-  <div class="sidebar">
-    <pm-query-editor (queryChanged)="onQueryChanged($event)"></pm-query-editor>
-  </div>
 
-  <div class='content'>
-    <div class='table-responsive'>
-      <table class='table'
-             *ngIf='warships.length'>
-        <thead>
-          <tr>
-            <th><a (click)="sortOn('className')">Class Name</a></th>
-            <th><a (click)="sortOn('nation')">Nationality</a></th>
-            <th><a (click)="sortOn('units')">Units</a></th>
-            <th><a (click)="sortOn('speedIrcwcc')">Speed (Ircwcc)</a></th>
-            <th><a (click)="sortOn('speedKnots')">Speed (Knots)</a></th>
-            <th><a (click)="sortOn('length')">Length (Feet)</a></th>
-            <th><a (click)="sortOn('beam')">Beam (Feet)</a></th>
-            <th><a (click)="sortOn('standardWeight')">Standard Weight</a></th>
-            <th><a (click)="sortOn('guns')">Guns</a></th>
-            <th><a (click)="sortOn('gunDiameter')">Gun Diameter</a></th>
-            <th><a (click)="sortOn('armor')">Armor</a></th>
-            <th><a (click)="sortOn('rudders')">Rudders</a></th>
-            <th><a (click)="sortOn('shafts')">Shafts</a></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let ship of warships'>
-            <td><a [routerLink]="['/ship-search', ship.id]"> {{ ship.className }} </a></td>
-            <td>{{ ship.nation | lowercase}}</td>
-            <td>{{ ship.units}}</td>
-            <td>{{ ship.speedIrcwcc}}</td>
-            <td>{{ ship.speedKnots}}</td>
-            <td>{{ ship.length}}</td>
-            <td>{{ ship.beam}}</td>
-            <td>{{ ship.standardWeight}}</td>
-            <td>{{ ship.guns}}</td>
-            <td>{{ ship.gunDiameter}}</td>
-            <td>{{ ship.armor}}</td>
-            <td>{{ ship.rudders}}</td>
-            <td>{{ ship.shafts}}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2">
+      <pm-query-editor (queryChanged)="onQueryChanged($event)"></pm-query-editor>
     </div>
-  </div>
+
+    <div class="col">
+      <div class='content'>
+        <div class='table-responsive'>
+          <table class='table'
+                 *ngIf='warships.length'>
+            <thead>
+              <tr>
+                <th><a (click)="sortOn('className')">Class Name</a></th>
+                <th><a (click)="sortOn('nation')">Nationality</a></th>
+                <th><a (click)="sortOn('units')">Units</a></th>
+                <th><a (click)="sortOn('speedIrcwcc')">Speed (Ircwcc)</a></th>
+                <th><a (click)="sortOn('speedKnots')">Speed (Knots)</a></th>
+                <th><a (click)="sortOn('length')">Length (Feet)</a></th>
+                <th><a (click)="sortOn('beam')">Beam (Feet)</a></th>
+                <th><a (click)="sortOn('standardWeight')">Standard Weight</a></th>
+                <th><a (click)="sortOn('guns')">Guns</a></th>
+                <th><a (click)="sortOn('gunDiameter')">Gun Diameter</a></th>
+                <th><a (click)="sortOn('armor')">Armor</a></th>
+                <th><a (click)="sortOn('rudders')">Rudders</a></th>
+                <th><a (click)="sortOn('shafts')">Shafts</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let ship of warships'>
+                <td><a [routerLink]="['/ship-search', ship.id]"> {{ ship.className }} </a></td>
+                <td>{{ ship.nation | lowercase}}</td>
+                <td>{{ ship.units}}</td>
+                <td>{{ ship.speedIrcwcc}}</td>
+                <td>{{ ship.speedKnots}}</td>
+                <td>{{ ship.length}}</td>
+                <td>{{ ship.beam}}</td>
+                <td>{{ ship.standardWeight}}</td>
+                <td>{{ ship.guns}}</td>
+                <td>{{ ship.gunDiameter}}</td>
+                <td>{{ ship.armor}}</td>
+                <td>{{ ship.rudders}}</td>
+                <td>{{ ship.shafts}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
 </div>

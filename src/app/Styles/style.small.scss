@@ -53,15 +53,6 @@ button#hamburgerBtn {
 nav {
   background-color: $colorHighlight;
 
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    list-style-type: none;
-  }
-
   a {
     display: block;
     padding: .8rem 0;
@@ -81,12 +72,7 @@ nav {
   ul.open {
     display: block;
   }
-
-  ul {
-    display: none;
-  }
 }
-
 
 
 main {
