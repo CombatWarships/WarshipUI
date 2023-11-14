@@ -51,7 +51,8 @@ button#hamburgerBtn {
 }
 
 nav {
-  background-color: $colorHighlight;
+  text-align: right;
+  float: right;
 
   a {
     display: block;
