@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,13 @@ export class AppComponent {
 
   title = 'Combat Warships';
 
-  constructor() {
+  GetLinkStyle(routeName:string) {
+    if (this.router.isActive(routeName, false))
+      return "nav-item active";
+    return "nav-item";
+
+  }
+
+  constructor(private router: Router) {
   }
 }
