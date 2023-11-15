@@ -18,7 +18,7 @@ export class ProposedShipService {
 
   constructor(private http: HttpClient)
   {
-    this.hostname = "https://localhost:7148";//"20.118.83.236/warship-import"; // window.location.hostname;
+    this.hostname = "http://20.118.83.236"; // ; "https://localhost:7148";//"20.118.83.236/warship-import"; // window.location.hostname;
   }
 
 
