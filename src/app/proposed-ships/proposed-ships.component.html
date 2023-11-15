@@ -1,0 +1,43 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Proposed Warships</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/add-proposedShip']">Add New Ship</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Delete Ship</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th *ngFor='let column of columns' scope="col">{{column}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let ship of warships'>
+          <td><a [routerLink]="['/proposed-ships', ship.id]"> {{ ship.className | titlecase }} </a></td>
+          <td>{{ ship.nation | titlecase }}</td>
+          <td>date</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

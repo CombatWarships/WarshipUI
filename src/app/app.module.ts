@@ -9,7 +9,8 @@ import { ShipSearchComponent } from './ship-search/ship-search.component';
 import { QueryEditorComponent } from './ship-search/query-editor/query-editor.component';
 import { ShipDetailComponent } from './ship-search/ship-detail/ship-detail.component';
 import { RouterModule } from '@angular/router';
-import { ShipImportComponent } from './ship-import/ship-import.component';
+import { ProposedShipsComponent } from './proposed-ships/proposed-ships.component';
+import { EditProposedShipsComponent } from './proposed-ships/edit-proposed-ships/edit-proposed-ships.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +18,17 @@ import { ShipImportComponent } from './ship-import/ship-import.component';
     ShipSearchComponent,
     QueryEditorComponent,
     ShipDetailComponent,
-    ShipImportComponent
+    ProposedShipsComponent,
+    EditProposedShipsComponent,
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'ship-import', component: ShipImportComponent },
+      { path: 'proposed-ships', component: ProposedShipsComponent },
+      { path: 'proposed-ships/:id', component: EditProposedShipsComponent },
+      { path: 'add-proposedShip', component: EditProposedShipsComponent },
       { path: 'ship-search', component: ShipSearchComponent },
       { path: 'ship-search/:id', component: ShipDetailComponent },
       { path: '', redirectTo:'ship-search', pathMatch:'full'},

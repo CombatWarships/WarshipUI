@@ -1,0 +1,26 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <ul>
+        <li>Ship Class: {{ ship?.className }}</li>
+        <li>Nationality: {{ ship?.nation | titlecase}}</li>
+        <li>Units: {{ ship?.units}}</li>
+        <li>IRCWCC Speed: {{ ship?.speedIrcwcc}}</li>
+        <li>Speed (Knots): {{ ship?.speedKnots}}</li>
+        <li>Length: {{ ship?.length}} ft</li>
+        <li>Beam: {{ ship?.beam}} ft</li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <li>Standard Tonnage: {{ ship?.standardWeight}} Tons</li>
+      <li>Total Guns: {{ ship?.guns}}</li>
+      <li>Maximum Gun Diameter: {{ ship?.gunDiameter}}</li>
+      <li>Belt Armor Thickness:{{ ship?.armor}}</li>
+      <li>Number of Rudders: {{ ship?.rudders}}</li>
+      <li>Number of Shafts: {{ ship?.shafts}}</li>
+
+    </div>
+  </div>
+</div>
