@@ -2,17 +2,18 @@ import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core";
 import { Observable, catchError, tap, throwError } from "rxjs";
 import { Ship } from "../Data/Ship";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WikiService {
-  private hostname = "unknown"
-  private get getShipsUrl() { return `${this.hostname}/Wiki` }
+  private rootUrl = "unknown"
+  private get getShipsUrl() { return `${this.rootUrl}/Wiki` }
 
   constructor(private http: HttpClient)
   {
-    this.hostname = "https://localhost:7148";//"20.118.83.236/warship-import"; // window.location.hostname;
+    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getShip(url: string): Observable<Ship> {

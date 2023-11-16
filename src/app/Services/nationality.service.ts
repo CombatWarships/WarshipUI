@@ -3,17 +3,18 @@ import { Injectable } from "@angular/core";
 import { Observable, catchError, tap, throwError } from "rxjs";
 import { Ship } from "../Data/Ship";
 import { Nationality } from "../Data/Nationality";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NationalityService {
-  private hostname = "unknown"
-  private get getUrl() { return `${this.hostname}/Nationality` }
+  private rootUrl = "unknown"
+  private get getUrl() { return `${this.rootUrl}/Nationality` }
 
   constructor(private http: HttpClient)
   {
-    this.hostname = "https://localhost:7148";//"20.118.83.236/warship-import"; // window.location.hostname;
+    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getAllNations(): Observable<Nationality[] > {

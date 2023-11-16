@@ -2,17 +2,18 @@ import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core";
 import { Observable, catchError, tap, throwError } from "rxjs";
 import { Ship } from "../Data/Ship";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class IrcwccService {
-  private hostname = "unknown"
-  private get getShipUrl() { return `${this.hostname}/IrcwccShipList` }
+  private rootUrl = "unknown"
+  private get getShipUrl() { return `${this.rootUrl}/IrcwccShipList` }
 
   constructor(private http: HttpClient)
   {
-    this.hostname = "https://localhost:7148";//"20.118.83.236/warship-import"; // window.location.hostname;
+    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getShip(shipListKey: number): Observable<Ship> {

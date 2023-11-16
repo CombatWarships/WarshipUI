@@ -2,17 +2,18 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, catchError, tap, throwError } from "rxjs";
 import { WarshipClassification } from "../Data/WarshipClassification";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WarshipClassificationService {
-  private hostname = "unknown"
-  private get getUrl() { return `${this.hostname}/WarshipClassification` }
+  private rootUrl = "unknown"
+  private get getUrl() { return `${this.rootUrl}/WarshipClassification` }
 
   constructor(private http: HttpClient)
   {
-    this.hostname = "https://localhost:7148";//"20.118.83.236/warship-import"; // window.location.hostname;
+    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getAllClassTypes(): Observable<WarshipClassification[]> {
