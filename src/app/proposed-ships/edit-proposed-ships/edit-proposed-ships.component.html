@@ -1,26 +1,93 @@
 
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <ul>
-        <li>Ship Class: {{ ship?.className }}</li>
-        <li>Nationality: {{ ship?.nation | titlecase}}</li>
-        <li>Units: {{ ship?.units}}</li>
-        <li>IRCWCC Speed: {{ ship?.speedIrcwcc}}</li>
-        <li>Speed (Knots): {{ ship?.speedKnots}}</li>
-        <li>Length: {{ ship?.length}} ft</li>
-        <li>Beam: {{ ship?.beam}} ft</li>
-      </ul>
-    </div>
 
-    <div class="col">
-      <li>Standard Tonnage: {{ ship?.standardWeight}} Tons</li>
-      <li>Total Guns: {{ ship?.guns}}</li>
-      <li>Maximum Gun Diameter: {{ ship?.gunDiameter}}</li>
-      <li>Belt Armor Thickness:{{ ship?.armor}}</li>
-      <li>Number of Rudders: {{ ship?.rudders}}</li>
-      <li>Number of Shafts: {{ ship?.shafts}}</li>
+  <form [formGroup]="shipForm">
+    <div class="form-group">
+
+      <div class="row" style="outline: blue dashed 3px; padding: .5rem .5rem .5rem .5rem; ">
+        <div class="col">
+
+          <label for="wikiLink">Wiki URL:</label>
+          <input class="form-control"
+                 id="wikiLink"
+                 name="wikiLink"
+                 formControlName="wikiLink" />
+
+          <button (click)="onWikiImport()">Import</button>
+        </div>
+
+        <div class="col">
+
+          <label for="shiplistKey">IRCWCC Ship List Key:</label>
+          <input class="form-control"
+                 id="shiplistKey"
+                 name="shiplistKey"
+                 formControlName="shiplistKey" />
+
+          <button (click)="onShipListKeyImport()">Import</button>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+
+          <div *ngFor='let prop of shipProperties'>
+
+            <label for="{{prop.field}}">{{prop.display}}</label>
+
+            <div class="d-flex align-content-stretch">
+
+              <div class="p-2 flex-grow-1 input-group mb-3">
+                <input class="{{prop.controlType}}"
+                       id="{{prop.field}}"
+                       name="{{prop.field}}"
+                       formControlName="{{prop.field}}" />
+                <span *ngIf="prop.units" class="input-group-text" id="{{prop.field}}-addon">{{prop.units}}</span>
+              </div>
+
+              <div class="p-2 flex-grow-1">
+                <button *ngIf="showValue(ircwccShip, wikiShip, prop.field)" class="stretch" (click)="changeValue(ircwccShip, prop.field)">{{getValue(ircwccShip,prop.field)}}</button>
+              </div>
+
+              <div class="p-2" flex-grow-1>
+                <button *ngIf="showValue(wikiShip, ircwccShip, prop.field)" class="stretch" (click)="changeValue(wikiShip, prop.field)">{{getValue(wikiShip, prop.field)}}</button>
+              </div>
+
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+
+
+          <label for="classType">Class Type</label>
+          <select class="form-select" aria-label="Default select example"
+                  id="classType" name="classType" formControlName="classType">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+
+          </select>
+
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <button (click)="onSave()">Save</button>
+      </div>
 
     </div>
-  </div>
+  </form>
 </div>

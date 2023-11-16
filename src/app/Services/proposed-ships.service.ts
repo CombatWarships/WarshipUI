@@ -1,11 +1,8 @@
-import { Injectable } from "@angular/core";
-import { IShip } from "../Data/IShip";
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable, catchError, tap, throwError } from "rxjs";
-import { } from "rxjs";
-import { IShipQuery } from "../Data/IShipQuery";
-import { IQueryRange } from "../Data/IQueryRange";
-import { Location } from '@angular/common';
+import { Ship } from "../Data/Ship";
+import { IProposedShipWorksheet } from "../Data/IProposedShipWorksheet";
 
 @Injectable({
   providedIn: 'root'
@@ -14,56 +11,51 @@ export class ProposedShipService {
   private hostname = "unknown"
   private get getShipsUrl() { return `${this.hostname}/ProposedShips` }
 
-  private cachedShips: IShip[] = [];
-
   constructor(private http: HttpClient)
   {
-    this.hostname = "http://20.118.83.236"; // ; "https://localhost:7148";//"20.118.83.236/warship-import"; // window.location.hostname;
+    this.hostname = "https://localhost:7148";//"20.118.83.236/warship-import"; // window.location.hostname;
   }
 
 
-  getAllShips(): Observable<IShip[]> {
-    return this.http.get<IShip[]>(this.getShipsUrl)
+  getAllShips(): Observable<Ship[]> {
+    return this.http.get<Ship[]>(this.getShipsUrl)
       .pipe(
         tap(data => {
           console.log('All: ', JSON.stringify(data));
-          this.cachedShips = data;
         }),
         catchError(this.handleError)
       );
   }
 
-  getShip(id: string): Observable<IShip> {
-    var localShip = this.cachedShips.find(ship => ship.id == id);
-    if (localShip != null) {
-      return new Observable(function subscribe(subscriber) {
-        subscriber.next(localShip);
-      });
-    }
-
+  getShip(id: string): Observable<IProposedShipWorksheet> {
     var url = `${this.getShipsUrl}/${id}`;
-    return this.http.get<IShip>(url)
+    return this.http.get<IProposedShipWorksheet>(url)
       .pipe(
         tap(data => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
 
-  //createShip(ship: IShip): Observable<IShip> {
-  //  var localShip = this.cachedShips.find(ship => ship.id == id);
-  //  if (localShip != null) {
-  //    return new Observable(function subscribe(subscriber) {
-  //      subscriber.next(localShip);
-  //    });
-  //  }
+  saveShip(ship: Ship) {
 
-  //  const params = new HttpParams().append('shipId', id);
-  //  return this.http.get<IShip>(this.getShipsUrl, { params })
-  //    .pipe(
-  //      tap(data => console.log('All: ', JSON.stringify(data))),
-  //      catchError(this.handleError)
-  //    );
-  //}
+    return this.http.put<Ship>(this.getShipsUrl, ship)
+      .pipe(
+        tap(data => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  deleteShips(shipIds: string[]) {
+
+    var json = JSON.stringify(shipIds);
+
+    const params = new HttpParams().append('shipIdsJson', json);
+    return this.http.delete<Ship[]>(this.getShipsUrl, {params})
+      .pipe(
+        tap(data => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
 
   handleError(err: HttpErrorResponse) {
 

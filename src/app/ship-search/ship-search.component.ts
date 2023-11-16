@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { IShip} from "../Data/IShip";
+import { Ship } from "../Data/Ship";
 import { ShipSearchService } from "../Services/ship-search.service";
 import { IShipQuery } from "../Data/IShipQuery";
 import { BehaviorSubject, combineLatest, scan, map } from "rxjs";
@@ -15,7 +15,7 @@ export class ShipSearchComponent {
   showImage = true;
   errorMessage: string = '';
 
-  warships: IShip[] = []
+  warships: Ship[] = []
 
   // make this a behavior subject instead
   sortedColumn = new BehaviorSubject<string>('');

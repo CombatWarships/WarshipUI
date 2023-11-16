@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ShipSearchComponent } from './ship-search/ship-search.component';
@@ -25,6 +25,7 @@ import { EditProposedShipsComponent } from './proposed-ships/edit-proposed-ships
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: 'proposed-ships', component: ProposedShipsComponent },
       { path: 'proposed-ships/:id', component: EditProposedShipsComponent },

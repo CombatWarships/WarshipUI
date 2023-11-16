@@ -12,8 +12,8 @@ export class AppComponent {
 
   GetLinkStyle(routeName:string) {
     if (this.router.isActive(routeName, false))
-      return "nav-item active";
-    return "nav-item";
+      return "nav-link active";
+    return "nav-link";
 
   }
 

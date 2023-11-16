@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IShip } from "../Data/IShip";
+import { Ship } from "../Data/Ship";
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Observable, catchError, tap, throwError } from "rxjs";
 import { } from "rxjs";
@@ -16,7 +16,7 @@ export class ShipSearchService {
   private get warshipUrl() { return `http://${this.hostname}/warshipregistry/api/Warship` }
   private get queryRangeUrl() { return `http://${this.hostname}/warshipregistry/api/ShipQueryRange` }
 
-  private cachedShips: IShip[] = [];
+  private cachedShips: Ship[] = [];
 
   constructor(private http: HttpClient)
   {
@@ -24,7 +24,7 @@ export class ShipSearchService {
   }
 
 
-  getShip(id: string): Observable<IShip> {
+  getShip(id: string): Observable<Ship> {
 
     var localShip = this.cachedShips.find(ship => ship.id == id);
     if (localShip != null) {
@@ -34,7 +34,7 @@ export class ShipSearchService {
     }
 
     const params = new HttpParams().append('shipId', id);
-    return this.http.get<IShip>(this.warshipUrl, { params })
+    return this.http.get<Ship>(this.warshipUrl, { params })
       .pipe(
         tap(data => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)
@@ -42,11 +42,11 @@ export class ShipSearchService {
   }
 
 
-  getShips(query: IShipQuery): Observable<IShip[]> {
+  getShips(query: IShipQuery): Observable<Ship[]> {
 
     query.take = 10000
 
-    return this.http.post<IShip[]>(this.searchUrl, query)
+    return this.http.post<Ship[]>(this.searchUrl, query)
       .pipe(
         tap(data => {
           console.log('All: ', JSON.stringify(data));

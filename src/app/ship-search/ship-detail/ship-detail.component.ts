@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShipSearchService } from '../../Services/ship-search.service';
-import { IShip } from '../../Data/IShip';
+import { Ship } from "src/app/Data/Ship";
 
 @Component({
   templateUrl: './ship-detail.component.html',
@@ -9,7 +9,7 @@ import { IShip } from '../../Data/IShip';
 })
 export class ShipDetailComponent {
 
-  ship?: IShip 
+  ship?: Ship 
 
   constructor(private route: ActivatedRoute, private searchSearvice : ShipSearchService) {
     this.route.paramMap.subscribe(
