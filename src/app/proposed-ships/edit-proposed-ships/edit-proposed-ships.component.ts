@@ -5,6 +5,9 @@ import { ProposedShipService } from '../../Services/proposed-ships.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WikiService } from '../../Services/wiki.service';
 import { IrcwccService } from '../../Services/ircwcc.service';
+import { NationalityService } from '../../Services/nationality.service';
+import { Nationality } from '../../Data/Nationality';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-edit-proposed-ships',
@@ -14,36 +17,38 @@ import { IrcwccService } from '../../Services/ircwcc.service';
 export class EditProposedShipsComponent {
   shipForm: FormGroup = this.fb.group({});
 
+  nations?: Observable<Nationality[]>
   wikiShip?: Ship
   ircwccShip?: Ship
   errorMessage: string = '';
 
   shipProperties: FieldMap[] = [
-    //{ field: "className", display: "Class Name" },
-    //{ field: "nation", display: "Nationality" },
-    //{ field: "classType", display: "Class Type", controlType:"form-select" },
-    //{ field: "length", display: "Length", units: "Feet" },
-    //{ field: "beam", display: "Beam", units: "Feet" },
-    { field: "standardWeight", display: "Standard Weight", units: "Tons" },
-    //{ field: "fullWeight", display: "Full Weight", units: "Tons" },
-    //{ field: "launched", display: "Launched" },
-    //{ field: "lastYearBuilt", display: "Completed" },
-    //{ field: "numberInClass", display: "Number of ships" },
-    //{ field: "rudders", display: "Rudders" },
-    //{ field: "rudderType", display: "Rudder Type" },
-    //{ field: "rudderStyle", display: "Rudder Style" },
-    //{ field: "shafts", display: "Shafts" },
-    //{ field: "speedKnots", display: "Speed", units: "Knots" },
-    //{ field: "speedIrcwcc", display: "IRCWCC Speed", units: "sec./100'" },
-    //{ field: "guns", display: "Number of Primary Guns" },
-    //{ field: "gunDiameter", display: "Primary Gun Diameter", units: "inches" },
-    //{ field: "armor", display: "Belt Armor", units: "inches" },
-    //{ field: "shipClass", display: "IRCWCC Ship Class" },
-    //{ field: "units", display: "IRCWCC Units" },
+    new FieldMap("className", "Class Name"),
+    new FieldMap("nation", "Nationality", "", "form-select", this.nationalityApi.getAllNations()),
+    new FieldMap("classType", "Class Type", "", "form-select"),
+    new FieldMap("lengthFt", "Length", "Feet"),
+    new FieldMap("beamFt", "Beam", "Feet"),
+    new FieldMap("standardWeight", "Standard Weight", "Tons"),
+    new FieldMap("fullWeight", "Full Weight", "Tons"),
+    new FieldMap("launched", "Launched"),
+    new FieldMap("lastYearBuilt", "Completed"),
+    new FieldMap("numberInClass", "Number of ships"),
+    new FieldMap("rudders", "Rudders"),
+    new FieldMap("rudderType", "Rudder Type"),
+    new FieldMap("rudderStyle", "Rudder Style"),
+    new FieldMap("shafts", "Shafts"),
+    new FieldMap("speedKnots", "Speed", "Knots"),
+    new FieldMap("speedIrcwcc", "IRCWCC Speed", "sec./100'"),
+    new FieldMap("guns", "Number of Primary Guns"),
+    new FieldMap("gunDiameter", "Primary Gun Diameter", "inches"),
+    new FieldMap("armor", "Belt Armor", "inches"),
+    new FieldMap("shipClass", "IRCWCC Ship Class"),
+    new FieldMap("units", "IRCWCC Units"),
   ];
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private proposedShipAPI: ProposedShipService,
-    private wikiAPI: WikiService, private ircwccAPI: IrcwccService) {
+    private wikiAPI: WikiService, private ircwccAPI: IrcwccService, private nationalityApi: NationalityService) {
+
     this.showShip(new Ship());
 
     this.route.paramMap.subscribe(
@@ -56,6 +61,7 @@ export class EditProposedShipsComponent {
               this.wikiShip = shipWorkSheet.wikiShip;
               this.ircwccShip = shipWorkSheet.ircwccShip;
             },
+            error: err => this.errorMessage = err
           });
         }
       }
@@ -111,8 +117,8 @@ export class EditProposedShipsComponent {
     if (source?.[field!] == null)
       return false;
 
-    if (source?.[field!] != this.shipForm.controls[field!].value)
-      return true;
+    if (source?.[field!] == this.shipForm.controls[field!].value)
+      return false;
 
     if (source?.[field!] == altSource?.[field!])
       return false;
@@ -122,8 +128,23 @@ export class EditProposedShipsComponent {
 }
 
 export class FieldMap {
-  field?: string;
-  display?: string;
+  field: string;
+  display: string;
   units?: string;
-  controlType?: string = "form-control";
+  controlType: string;
+  options?: Observable<IOption[]>;
+
+  constructor(field: string, display: string, units?: string, controlType: string = "form-control", options?: Observable<IOption[]>) {
+    this.field = field;
+    this.display = display;
+    this.units = units;
+    this.controlType = controlType;
+    this.options = options;
+  }
+}
+
+export interface IOption
+{
+  value?: string;
+  display?: string;
 }
