@@ -55,7 +55,7 @@
               <select class="form-select"
                       id="{{prop.field}}" name="{{prop.field}}"
                       formControlName="{{prop.field}}">
-                <option *ngFor='let option of prop.options | async' value="{{option.value}}">{{option.display}}</option>
+                <option *ngFor='let option of prop.options | async' value="{{option.id}}">{{option.displayName}}</option>
               </select>
             </div>
 

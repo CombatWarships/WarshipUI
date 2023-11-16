@@ -8,6 +8,8 @@ import { IrcwccService } from '../../Services/ircwcc.service';
 import { NationalityService } from '../../Services/nationality.service';
 import { Nationality } from '../../Data/Nationality';
 import { Observable, of } from 'rxjs';
+import { FieldMap } from './FieldMap';
+import { WarshipClassificationService } from '../../Services/warshipClassification.service';
 
 @Component({
   selector: 'app-edit-proposed-ships',
@@ -25,7 +27,7 @@ export class EditProposedShipsComponent {
   shipProperties: FieldMap[] = [
     new FieldMap("className", "Class Name"),
     new FieldMap("nation", "Nationality", "", "form-select", this.nationalityApi.getAllNations()),
-    new FieldMap("classType", "Class Type", "", "form-select"),
+    new FieldMap("classType", "Class Type", "", "form-select", this.warshipClassService.getAllClassTypes()),
     new FieldMap("lengthFt", "Length", "Feet"),
     new FieldMap("beamFt", "Beam", "Feet"),
     new FieldMap("standardWeight", "Standard Weight", "Tons"),
@@ -47,7 +49,8 @@ export class EditProposedShipsComponent {
   ];
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private proposedShipAPI: ProposedShipService,
-    private wikiAPI: WikiService, private ircwccAPI: IrcwccService, private nationalityApi: NationalityService) {
+    private wikiAPI: WikiService, private ircwccAPI: IrcwccService, private nationalityApi: NationalityService,
+    private warshipClassService: WarshipClassificationService) {
 
     this.showShip(new Ship());
 
@@ -127,24 +130,3 @@ export class EditProposedShipsComponent {
   }
 }
 
-export class FieldMap {
-  field: string;
-  display: string;
-  units?: string;
-  controlType: string;
-  options?: Observable<IOption[]>;
-
-  constructor(field: string, display: string, units?: string, controlType: string = "form-control", options?: Observable<IOption[]>) {
-    this.field = field;
-    this.display = display;
-    this.units = units;
-    this.controlType = controlType;
-    this.options = options;
-  }
-}
-
-export interface IOption
-{
-  value?: string;
-  display?: string;
-}
