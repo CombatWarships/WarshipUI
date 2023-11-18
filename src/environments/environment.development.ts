@@ -1,5 +1,4 @@
 export const environment = {
-  apiUrl: 'https://localhost:7148',
-  warshipSearchRoute: '',
-  warshipImportRoute: ''
+  warshipSearchUrl: 'https://localhost:7106',
+  warshipImportUrl: 'https://localhost:7148'
 };

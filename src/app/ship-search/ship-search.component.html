@@ -13,39 +13,24 @@
                  *ngIf='warships.length'>
             <thead>
               <tr>
-                <th><a (click)="sortOn('className')">Class Name</a></th>
-                <th><a (click)="sortOn('nation')">Nationality</a></th>
-                <th><a (click)="sortOn('units')">Units</a></th>
-                <th><a (click)="sortOn('speedIrcwcc')">Speed (Ircwcc)</a></th>
-                <th><a (click)="sortOn('speedKnots')">Speed (Knots)</a></th>
-                <th><a (click)="sortOn('length')">Length (Feet)</a></th>
-                <th><a (click)="sortOn('beam')">Beam (Feet)</a></th>
-                <th><a (click)="sortOn('standardWeight')">Standard Weight</a></th>
-                <th><a (click)="sortOn('guns')">Guns</a></th>
-                <th><a (click)="sortOn('gunDiameter')">Gun Diameter</a></th>
-                <th><a (click)="sortOn('armor')">Armor</a></th>
-                <th><a (click)="sortOn('rudders')">Rudders</a></th>
-                <th><a (click)="sortOn('shafts')">Shafts</a></th>
+                <th *ngFor='let column of columns'>
+                  <a (click)="sortOn(column.field)">{{column.columnName}}</a>
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor='let ship of warships'>
-                <td><a [routerLink]="['/ship-search', ship.id]"> {{ ship.className }} </a></td>
-                <td>{{ ship.nation | lowercase}}</td>
-                <td>{{ ship.units}}</td>
-                <td>{{ ship.speedIrcwcc}}</td>
-                <td>{{ ship.speedKnots}}</td>
-                <td>{{ ship.lengthFt}}</td>
-                <td>{{ ship.beamFt}}</td>
-                <td>{{ ship.standardWeight}}</td>
-                <td>{{ ship.guns}}</td>
-                <td>{{ ship.gunDiameter}}</td>
-                <td>{{ ship.armor}}</td>
-                <td>{{ ship.rudders}}</td>
-                <td>{{ ship.shafts}}</td>
+                <td *ngFor='let column of columns'>
+                  <a *ngIf="column.showLink" [routerLink]="['/ship-search', ship.id]">
+                    {{this.getValue(ship, column.field)}}
+                  </a>
+                  <div *ngIf="!column.showLink">
+                    {{this.getValue(ship, column.field)}}
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
+      </div>
     </div>
-</div>

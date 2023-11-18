@@ -9,12 +9,10 @@ import { environment } from "../../environments/environment";
   providedIn: 'root'
 })
 export class ProposedShipService {
-  private rootUrl = "unknown"
-  private get getShipsUrl() { return `${this.rootUrl}/ProposedShips` }
+  private get getShipsUrl() { return `${environment.warshipImportUrl}/ProposedShips` }
 
   constructor(private http: HttpClient)
   {
-    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getAllShips(): Observable<Ship[]> {

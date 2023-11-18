@@ -4,6 +4,19 @@ import { ShipSearchService } from "../Services/ship-search.service";
 import { IShipQuery } from "../Data/IShipQuery";
 import { BehaviorSubject, combineLatest, scan, map } from "rxjs";
 
+export class ColumnMap {
+  field: string;
+  columnName: string;
+  showLink?: boolean;
+
+  constructor(columnName: string, field: string, showLink: boolean = false) {
+    this.columnName = columnName;
+    this.field = field;
+    this.showLink = showLink;
+  }
+}
+
+
 @Component({
   templateUrl: './ship-search.component.html',
   styleUrls: ["./ship-search.component.scss"]
@@ -16,6 +29,23 @@ export class ShipSearchComponent {
   errorMessage: string = '';
 
   warships: Ship[] = []
+
+  columns: ColumnMap[] = [
+    new ColumnMap("Class Name", "className", true),
+    new ColumnMap("Nationality", "nation"),
+    new ColumnMap("Units", "units"),
+    new ColumnMap("Speed (Ircwcc)", "speedIrcwcc"),
+    new ColumnMap("Speed (Knots)", "speedKnots"),
+    new ColumnMap("Length (Feet)", "lengthFt"),
+    new ColumnMap("Beam (Feet)", "beamFt"),
+    new ColumnMap("Standard Weight", "standardWeight"),
+    new ColumnMap("Guns", "guns"),
+    new ColumnMap("Gun Diameter", "gunDiameter"),
+    new ColumnMap("Armor", "armor"),
+    new ColumnMap("Rudders", "rudders"),
+    new ColumnMap("Shafts", "shafts"),
+  ]
+
 
   // make this a behavior subject instead
   sortedColumn = new BehaviorSubject<string>('');
@@ -58,6 +88,11 @@ export class ShipSearchComponent {
   })
   return sortedArray;
 }
+
+
+  getValue(source: any, field?: string): string {
+    return source?.[field!];
+  }
 
   constructor(private searchAPI: ShipSearchService) { }
 

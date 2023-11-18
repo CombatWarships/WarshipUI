@@ -12,16 +12,14 @@ import { environment } from "../../environments/environment";
   providedIn: 'root'
 })
 export class ShipSearchService {
-  private rootUrl = "unknown"
-  private get searchUrl() { return `${this.rootUrl}/api/SearchWarships` }
-  private get warshipUrl() { return `${this.rootUrl}/api/Warship` }
-  private get queryRangeUrl() { return `${this.rootUrl}/api/ShipQueryRange` }
+  private get searchUrl() { return `${environment.warshipSearchUrl}/api/SearchWarships` }
+  private get warshipUrl() { return `${environment.warshipSearchUrl}/api/Warship` }
+  private get queryRangeUrl() { return `${environment.warshipSearchUrl}/api/ShipQueryRange` }
 
   private cachedShips: Ship[] = [];
 
   constructor(private http: HttpClient)
   {
-    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getShip(id: string): Observable<Ship> {

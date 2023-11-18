@@ -8,12 +8,10 @@ import { environment } from "../../environments/environment";
   providedIn: 'root'
 })
 export class WarshipClassificationService {
-  private rootUrl = "unknown"
-  private get getUrl() { return `${this.rootUrl}/WarshipClassification` }
+  private get getUrl() { return `${environment.warshipImportUrl}/WarshipClassification` }
 
   constructor(private http: HttpClient)
   {
-    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getAllClassTypes(): Observable<WarshipClassification[]> {

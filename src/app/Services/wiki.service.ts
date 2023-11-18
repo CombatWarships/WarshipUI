@@ -8,12 +8,10 @@ import { environment } from "../../environments/environment";
   providedIn: 'root'
 })
 export class WikiService {
-  private rootUrl = "unknown"
-  private get getShipsUrl() { return `${this.rootUrl}/Wiki` }
+  private get getShipsUrl() { return `${environment.warshipImportUrl}/Wiki` }
 
   constructor(private http: HttpClient)
   {
-    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getShip(url: string): Observable<Ship> {

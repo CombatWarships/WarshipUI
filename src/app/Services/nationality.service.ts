@@ -9,12 +9,10 @@ import { environment } from "../../environments/environment";
   providedIn: 'root'
 })
 export class NationalityService {
-  private rootUrl = "unknown"
-  private get getUrl() { return `${this.rootUrl}/Nationality` }
+  private get getUrl() { return `${environment.warshipImportUrl}/Nationality` }
 
   constructor(private http: HttpClient)
   {
-    this.rootUrl = `${environment.apiUrl}${environment.warshipImportRoute}`;
   }
 
   getAllNations(): Observable<Nationality[] > {

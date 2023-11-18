@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProposedShipService } from '../Services/proposed-ships.service';
 import { Ship } from "../Data/Ship";
 import { map } from 'rxjs';
+import { IrcwccService } from '../Services/ircwcc.service';
 
 @Component({
   selector: 'app-proposed-ships',
@@ -19,7 +20,7 @@ export class ProposedShipsComponent {
   errorMessage: string = '';
   warships: IProposedShipViewModel[] = []
 
-  constructor(private proposedShipAPI: ProposedShipService) { }
+  constructor(private proposedShipAPI: ProposedShipService, private ircwccApi: IrcwccService) { }
 
   ngOnInit() {
     this.refreshShipList();
@@ -36,22 +37,31 @@ export class ProposedShipsComponent {
           } as IProposedShipViewModel))
         }))
       .subscribe({
-      next: ships => {
-        this.warships = ships
-      },
-      error: err => this.errorMessage = err
-    });
+        next: ships => {
+          this.warships = ships
+        },
+        error: err => this.errorMessage = err
+      });
   }
 
-  onDeleteShip()
-  {
+  onDeleteShip() {
     var deletedShips = this.warships.filter(s => s.isChecked);
 
     var ids = deletedShips.map(s => s.id);
 
-    this.proposedShipAPI.deleteShips(ids)      
+    this.proposedShipAPI.deleteShips(ids)
       .subscribe({
         next: ships => {
+          this.refreshShipList();
+        },
+        error: err => this.errorMessage = err
+      });
+  }
+
+  importIrcwccShipList() {
+    this.ircwccApi.importShipList()
+      .subscribe({
+        next: success => {
           this.refreshShipList();
         },
         error: err => this.errorMessage = err
