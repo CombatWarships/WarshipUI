@@ -31,7 +31,11 @@ export class QueryEditorComponent implements OnInit {
       minLength: 0,
       maxLength: 0,
       minBeam: 0,
-      maxBeam: 0
+      maxBeam: 0,
+      minRudders: 1,
+      maxRudders: 2,
+      minShafts: 1,
+      maxShafts: 4,
     });
 
 
@@ -64,6 +68,16 @@ export class QueryEditorComponent implements OnInit {
             this.queryForm.controls['minBeam'].setValue(range.minBeam);
           if (!this.queryForm.controls['maxBeam'].touched)
             this.queryForm.controls['maxBeam'].setValue(range.maxBeam);
+
+          if (!this.queryForm.controls['minRudders'].touched)
+            this.queryForm.controls['minRudders'].setValue(range.minRudders);
+          if (!this.queryForm.controls['maxRudders'].touched)
+            this.queryForm.controls['maxRudders'].setValue(range.maxRudders);
+
+          if (!this.queryForm.controls['minShafts'].touched)
+            this.queryForm.controls['minShafts'].setValue(range.minShafts);
+          if (!this.queryForm.controls['maxShafts'].touched)
+            this.queryForm.controls['maxShafts'].setValue(range.maxShafts);
         },
         error: err => {
         }

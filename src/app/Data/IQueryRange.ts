@@ -1,17 +1,22 @@
-export interface IQueryRange
-{
-    minUnits? : number;
-    maxUnits?  : number;
+export interface IQueryRange {
+  minUnits?: number;
+  maxUnits?: number;
 
-   minSpeedIrcwcc?  : number;
-   maxSpeedIrcwcc? : number;
+  minSpeedIrcwcc?: number;
+  maxSpeedIrcwcc?: number;
 
-    minSpeedKnots?  : number;
-    maxSpeedKnots?  : number;
+  minSpeedKnots?: number;
+  maxSpeedKnots?: number;
 
-    minLength?  : number;
-    maxLength?  : number;
+  minLength?: number;
+  maxLength?: number;
 
-    minBeam?  : number;
-    maxBeam?  : number;
+  minBeam?: number;
+  maxBeam?: number;
+
+  minRudders?: number;
+  maxRudders?: number;
+
+  minShafts?: number;
+  maxShafts?: number;
 }
